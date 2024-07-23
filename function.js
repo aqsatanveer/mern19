@@ -15,16 +15,32 @@
 // console.log(typeof pallindrome);
 
 //arrow function and anonymous function
-const evenOdd = (P1 = 7, P2 = 8) => {
-  P1 % 2 == 0 ? console.log(${P1} -> Even) : console.log(${P1} -> Odd);
-  P2 % 2 == 0 ? console.log(${P2} -> Even) : console.log(${P2} -> Odd);
+const evenOdd = (
+  P1 = 7,
+  P2 = ((params) => {
+    console.log("IIFE", params);
+    return 1;
+  })("params value")
+) => {
+  P1 % 2 == 0 ? console.log(`${P1} -> Even`) : console.log(`${P1} -> Odd`);
+  P2 % 2 == 0 ? console.log(`${P2} -> Even`) : console.log(`${P2} -> Odd`);
 };
-evenOdd();
+evenOdd(1, 2);
 //IIFE
 
-// ((params) => {
-//   console.log("iife", params);
-// })(
-//   //function call
-//   "params value"
-// );
+// pass by copy pass by reference
+const main = () => {
+  const check = (param, updateArray) => {
+    console.log("P", param);
+    updateArray([4, 5]);
+  };
+  let Arg = [1, 2];
+
+  const updateArray = (newvalue) => {
+    Arg = newvalue;
+  };
+
+  check(Arg, updateArray);
+  console.log("Arg", Arg);
+};
+main();
